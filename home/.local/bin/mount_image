@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# mount_image, a program that mounts a specific partition from a RAW
+# disk image file, such as a full-disk dd copy or a file used by QEMU.
+# Note that compressed and other space-saving formats (qcaw2, etc.)
+# will NOT work!
+
+# Use:
+# mount_image image_file partition_number mount_point
+#
+# For instance,
+#
+# mount_image image.raw 2 /mnt/shared
+#
+# mounts partition 2 from image.raw at /mnt/shared.
+
+# This program relies on my GPT fdisk (gdisk) program to help identify
+# partitions. I could have used regular fdisk, but this would have
+# limited the program to working with MBR-formatted disks. With gdisk,
+# both MBR- and GPT-formatted disks will work.
+
+gdisk -l $1 > /tmp/mount_image.tmp
+let StartSector=`egrep "^   $2|^  $2" /tmp/mount_image.tmp | fmt -u -s | sed -e 's/^[ \t]*//' | head -1 | cut -d " " -f 2`
+
+let StartByte=($StartSector*512)
+
+echo "Mounting partition $2, which begins at sector $StartSector"
+
+mount -o loop,offset=$StartByte $1 $3
+
+rm /tmp/mount_image.tmp
+

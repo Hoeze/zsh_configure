@@ -1,0 +1,40 @@
+LS_COLORS='rs=0:di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:su=37;41:sg=30;43:tw=30;42:ow=34;42:st=37;44:ex=01;32:';
+export LS_COLORS
+eval `dircolors -b`
+
+alias la='ls -av'                # zeige auch versteckte Dateien
+alias lsa='ls -ldv .*'            # zeige nur versteckte Dateien
+alias ll="ls -lhv --group-directories-first" # ls als Liste, Verzeichnisse ganz oben
+alias l='ls -Fv --color=always --group-directories-first' # Farbige Liste + Dateiendungen anzeigen
+alias lx='ls -lXB'              # Sortierung nach Endung
+alias lk='ls -lSr'              # Sortierung nach Grösse
+alias lc='ls -lcr'               # Sortierung nach Änderungsdatum
+alias lu='ls -lur'               # Sortierung nach letztem Zugriff
+alias lt='ls -ltr'              # Sortierung nach Datum
+alias lm='ls -alv |more'         # ls mit more (scrollbar)
+alias lr='ls -lRv |more'         # Rekursive Liste mit more (scrollbar)
+alias lg='ls | grep '           # ls im lokalen Verzeichnis mit grep
+alias gl='git log --graph'
+alias gs='git status'
+alias gc='git commit'
+alias ga='git add'
+
+alias virsh='EDITOR=/usr/bin/nano virsh'
+
+alias mv='nocorrect mv'       # Keine TypoKorrektur
+alias cp='nocorrect cp'       #     ^        ^
+alias mkdir='nocorrect mkdir' #
+
+alias rsync-mv="rsync -a --progress --remove-source-files"
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+alias pling='paplay /usr/share/sounds/freedesktop/stereo/complete.oga'
+
+# git:
+alias git-pup='git pull --recurse-submodules && git submodule update --recursive'
+alias git-amend='git commit --amend --no-edit'
+
+alias tcol='column -t -s "	"'
+
+# du -sh
+dusch () {du -sch $* | sort -h}
+
