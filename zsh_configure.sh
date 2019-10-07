@@ -8,8 +8,17 @@ curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | 
     cd ${ZSH}/custom/plugins && \
     git clone git://github.com/zsh-users/zsh-syntax-highlighting.git
 
+
+########## CONFIGURE VIM ###########
+
 git clone https://github.com/amix/vimrc.git ${HOME}/.vim_runtime
 sh ${HOME}/.vim_runtime/install_awesome_vimrc.sh
+
+mkdir -p ${HOME}/.vim/syntax
+wget https://bitbucket.org/snakemake/snakemake/raw/master/misc/vim/syntax/snakemake.vim -P ${HOME}/.vim/syntax/
+
+######### ----------- ##########
+
 
 cp -rf ${wd}/home/. ${HOME}/
 

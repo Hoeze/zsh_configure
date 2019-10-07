@@ -38,3 +38,5 @@ alias tcol='column -t -s "	"'
 # du -sh
 dusch () {du -sch $* | sort -h}
 
+# insecure SSH without host key checking
+alias ssh-insec='ssh -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no"'
