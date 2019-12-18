@@ -8,15 +8,25 @@ unbind-key -n M-S-Down
 unbind-key -n M-S-Left
 unbind-key -n M-S-Right
 
-bind-key -n M-S-Left previous-window
-bind-key -n M-S-Right next-window
-bind-key -n M-S-Up switch-client -p
-bind-key -n M-S-Down switch-client -n
+#bind-key -n M-S-Left previous-window
+#bind-key -n M-S-Right next-window
+#bind-key -n M-S-Up switch-client -p
+#bind-key -n M-S-Down switch-client -n
+#
+#bind-key -n M-Up display-panes \; select-pane -U
+#bind-key -n M-Down display-panes \; select-pane -D
+#bind-key -n M-Left display-panes \; select-pane -L
+#bind-key -n M-Right display-panes \; select-pane -R
 
-bind-key -n M-Up display-panes \; select-pane -U
-bind-key -n M-Down display-panes \; select-pane -D
-bind-key -n M-Left display-panes \; select-pane -L
-bind-key -n M-Right display-panes \; select-pane -R
+bind-key -n M-Left previous-window
+bind-key -n M-Right next-window
+bind-key -n M-Up switch-client -p
+bind-key -n M-Down switch-client -n
+
+bind-key -n M-S-Up display-panes \; select-pane -U
+bind-key -n M-S-Down display-panes \; select-pane -D
+bind-key -n M-S-Left display-panes \; select-pane -L
+bind-key -n M-S-Right display-panes \; select-pane -R
 
 unbind-key -n C-a
 set -g prefix ^A
