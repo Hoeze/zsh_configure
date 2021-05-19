@@ -1,0 +1,24 @@
+#!/bin/bash
+set -e
+
+user="$1"
+
+smb_user_dirs=("/mnt/insecure/samba/users" "/mnt/secure/autobackup/samba/users")
+smb_group="sambausers"
+
+# create user
+useradd $user
+usermod $user -L
+chsh $user -s /bin/false
+mkhomedir_helper $user
+
+# add to samba group
+usermod $user -a -G $smb_group
+
+# create samba directories
+userhome=$(getent passwd $user| cut -d: -f6)
+sudo -u $user mkdir $userhome/samba
+for i in $smb_user_dirs; do mkdir $i/$user; chown ${user}:${user} $i; done
+
+echo "Samba-only user '$user' (no login) successfully created."
+echo "Do not forget to set an password: 'smbpasswd -a $user'"

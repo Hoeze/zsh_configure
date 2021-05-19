@@ -1,0 +1,6 @@
+#!/bin/bash
+
+user=$1
+
+useradd $user && usermod $user -L && chsh $user -s /bin/false
+

@@ -1,0 +1,28 @@
+#!/bin/bash
+
+set -e
+
+keyfolder="/root/.crypt"
+
+dev="$1"
+
+PARTUUID=$(blkid "$dev" | grep "PARTUUID" | sed -e 's/.*PARTUUID="//' -e 's/".*//')
+
+if [ "$PARTUUID" = "" ]; then
+    echo "Missing PARTUUID for $dev"
+    exit 1
+fi
+
+echo "Setting up encryption for ${dev} with PARTUUID=\"${PARTUUID}\""
+cryptsetup luksFormat -c aes-xts-plain64 -s 512 -h sha512 -y $dev
+
+echo "Generating keyfile ${keyfolder}/${PARTUUID}"
+dd if=/dev/urandom of="${keyfolder}/${PARTUUID}" bs=1 count=256
+chmod 600 "${keyfolder}/${PARTUUID}"
+
+echo "Adding keyfile to ${dev}..."
+cryptsetup luksAddKey "$dev" "${keyfolder}/${PARTUUID}"
+
+UUID=$(blkid "$dev" | grep " UUID" | sed -e 's/.* UUID="//' -e 's/".*//')
+echo "encX  UUID=$UUID  ${keyfolder}/${PARTUUID} luks"
+
