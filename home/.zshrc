@@ -96,5 +96,5 @@ promptinit
 prompt bigfade red
 setopt nobanghist
 
-source $ZSHRC_LOCAL
+test -f $ZSHRC_LOCAL && source $ZSHRC_LOCAL
 
