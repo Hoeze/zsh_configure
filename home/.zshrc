@@ -85,7 +85,7 @@ source $ZSH/oh-my-zsh.sh
 
 # ------------ >>> custom <<< --------------
 export HISTSIZE=20000
-export HISTFILE="$HOME/.history"
+export HISTFILE="$HOME/.zsh_history"
 export SAVEHIST=$HISTSIZE
 
 source $ZSH_CONF/.zkbd
@@ -96,5 +96,5 @@ promptinit
 prompt bigfade red
 setopt nobanghist
 
-source $ZSHRC_LOCAL
+# test -f $ZSHRC_LOCAL && source $ZSHRC_LOCAL
 
