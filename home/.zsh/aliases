@@ -40,3 +40,11 @@ dusch () {du -sch $* | sort -h}
 
 # insecure SSH without host key checking
 alias ssh-insec='ssh -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no"'
+
+function cysh() {
+    AUTOSSH_GATETIME=0 autossh -M 0 -t -e none \
+        -o ServerAliveInterval=2 -o ServerAliveCountMax=4 \
+        $@
+}
+
+
