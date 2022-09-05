@@ -47,4 +47,5 @@ function cysh() {
         $@
 }
 
+alias watch="watch --color"
 
