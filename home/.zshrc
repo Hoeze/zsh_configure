@@ -56,6 +56,9 @@ plugins=(git compleat dirhistory lol urltools history-substring-search)
 # export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl"
 # export MANPATH="/usr/local/man:$MANPATH"
 
+# for zsh-completion
+fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
+
 source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
@@ -95,9 +98,6 @@ autoload -Uz promptinit
 promptinit
 prompt bigfade red
 setopt nobanghist
-
-# for zsh-completion
-fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 
 # test -f $ZSHRC_LOCAL && source $ZSHRC_LOCAL
 
