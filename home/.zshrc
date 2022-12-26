@@ -96,5 +96,8 @@ promptinit
 prompt bigfade red
 setopt nobanghist
 
+# for zsh-completion
+fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
+
 # test -f $ZSHRC_LOCAL && source $ZSHRC_LOCAL
 

@@ -8,6 +8,8 @@ curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | 
     cd ${ZSH}/custom/plugins && \
     git clone git://github.com/zsh-users/zsh-syntax-highlighting.git
 
+git clone https://github.com/zsh-users/zsh-completions ${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions
+
 
 ########## CONFIGURE VIM ###########
 
