@@ -18,6 +18,7 @@ alias gl='git log --graph'
 alias gs='git status'
 alias gc='git commit'
 alias ga='git add'
+alias rga='rg --no-ignore -.'
 
 alias virsh='EDITOR=/usr/bin/nano virsh'
 
