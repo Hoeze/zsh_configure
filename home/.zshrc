@@ -99,5 +99,8 @@ promptinit
 prompt bigfade red
 setopt nobanghist
 
+# Preserve a partial line
+setopt PROMPT_SP
+
 # test -f $ZSHRC_LOCAL && source $ZSHRC_LOCAL
 
