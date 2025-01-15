@@ -3,8 +3,6 @@ export ZSH_CONF=$HOME/.zsh
 export ZSH=$ZSH_CONF/oh-my-zsh
 export ZSHRC_LOCAL=$HOME/.zshrc_local
 
-source $HOME/.env
-
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
@@ -104,4 +102,6 @@ setopt nobanghist
 setopt PROMPT_SP
 
 # test -f $ZSHRC_LOCAL && source $ZSHRC_LOCAL
+
+source $HOME/.env
 
