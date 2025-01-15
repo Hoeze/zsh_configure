@@ -17,7 +17,7 @@ git clone https://github.com/amix/vimrc.git ${HOME}/.vim_runtime
 sh ${HOME}/.vim_runtime/install_awesome_vimrc.sh
 
 mkdir -p ${HOME}/.vim/syntax
-wget https://raw.githubusercontent.com/snakemake/snakemake/master/misc/vim/syntax/snakemake.vim -P ${HOME}/.vim/syntax/
+wget https://raw.githubusercontent.com/snakemake/snakemake/master/misc/vim/syntax/snakemake.vim -O ${HOME}/.vim/syntax/snakemake.vim
 
 ######### ----------- ##########
 
