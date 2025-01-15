@@ -100,6 +100,8 @@ setopt nobanghist
 
 # Preserve a partial line
 setopt PROMPT_SP
+# Display non-zero exit codes
+setopt PRINT_EXIT_VALUE
 
 # test -f $ZSHRC_LOCAL && source $ZSHRC_LOCAL
 
