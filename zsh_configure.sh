@@ -18,6 +18,8 @@ sh ${HOME}/.vim_runtime/install_awesome_vimrc.sh
 
 mkdir -p ${HOME}/.vim/syntax
 wget https://raw.githubusercontent.com/snakemake/snakemake/master/misc/vim/syntax/snakemake.vim -O ${HOME}/.vim/syntax/snakemake.vim
+wget https://raw.githubusercontent.com/hashivim/vim-terraform/master/syntax/hcl.vim -O ${HOME}/.vim/syntax/hcl.vim
+wget https://raw.githubusercontent.com/hashivim/vim-terraform/master/syntax/terraform.vim -O ${HOME}/.vim/syntax/terraform.vim
 
 ######### ----------- ##########
 
