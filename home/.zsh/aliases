@@ -20,6 +20,7 @@ alias gc='git commit'
 alias ga='git add'
 alias gd='git diff'
 alias rga='rg --no-ignore -.'
+alias difft='difft --color always'
 
 alias virsh='EDITOR=/usr/bin/nano virsh'
 
