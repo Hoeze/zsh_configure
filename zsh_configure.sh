@@ -49,5 +49,15 @@ git config --global color.diff.old        "red bold"
 git config --global color.diff.new        "green bold"
 git config --global color.diff.whitespace "red reverse"
 
+# KeePassXC merge driver
+#
+# Usage:
+#  Create or update your .gitattributes file in the repository root:
+#  ```
+#  *.kdbx merge=keepassxc
+#  ```
+git config --global merge.keepassxc.name "KeePassXC Merge Driver"
+git config --global merge.keepassxc.driver "keepassxc-cli merge -s %A %B"
+
 ######### ----------- ##########
 
