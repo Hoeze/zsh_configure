@@ -49,6 +49,15 @@ git config --global color.diff.old        "red bold"
 git config --global color.diff.new        "green bold"
 git config --global color.diff.whitespace "red reverse"
 
+# git-delta
+if which delta; then
+    git config --global core.pager delta
+    git config --global interactive.diffFilter 'delta --color-only'
+    git config --global delta.navigate true
+    git config --global delta.dark true
+    git config --global merge.conflictStyle zdiff3
+fi
+
 # KeePassXC merge driver
 #
 # Usage:
