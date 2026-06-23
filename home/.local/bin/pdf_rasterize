@@ -1,0 +1,34 @@
+#!/bin/sh
+
+usage() {
+	cat <<EOF
+Usage: ${0##*/} INPUT OUTPUT
+
+Rasterize a PDF into a downsampled image-based PDF using Ghostscript
+(pdfimage24 device, 2400 dpi, downscaled 2x).
+
+Arguments:
+  INPUT   source PDF file
+  OUTPUT  destination PDF file
+EOF
+}
+
+case "$1" in
+	-h|--help)
+		usage
+		exit 0
+		;;
+esac
+
+if [ "$#" -ne 2 ]; then
+	usage >&2
+	exit 1
+fi
+
+if [ ! -f "$1" ]; then
+	echo "${0##*/}: input not found: $1" >&2
+	exit 1
+fi
+
+exec /usr/bin/env gs -dNOPAUSE -dBATCH -sDEVICE=pdfimage24 \
+	-r2400 -dDownScaleFactor=2 -o "$2" "$1"
