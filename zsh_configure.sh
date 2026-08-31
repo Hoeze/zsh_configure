@@ -4,16 +4,46 @@ wd=$(pwd)
 
 export ZSH="${HOME}/.zsh/oh-my-zsh"
 
-curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh && \
-    cd ${ZSH}/custom/plugins && \
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
+# Fast-forward the checkout at $1. A merge or a rebase here would touch someone
+# else's working tree, so refuse anything that is not a clean fast-forward and
+# carry on rather than aborting the install.
+update_checkout() {
+    echo "updating: $1"
+    git -C "$1" pull --ff-only || echo "could not fast-forward $1, left as is" >&2
+}
 
-git clone https://github.com/zsh-users/zsh-completions ${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions
+# Clone $1 into $2, or update $2 if it is already a checkout. Keeps the script
+# re-runnable: a plain `git clone` over an existing directory is a fatal error.
+clone_or_update() {
+    if [ -d "$2/.git" ]; then
+        update_checkout "$2"
+    elif [ -e "$2" ]; then
+        echo "not a git checkout, left as is: $2" >&2
+    else
+        git clone "$1" "$2"
+    fi
+}
+
+# The oh-my-zsh installer refuses to run when $ZSH already exists, so on a
+# second run update the checkout in place instead. That is what `omz update`
+# does anyway.
+if [ -d "${ZSH}/.git" ]; then
+    update_checkout "${ZSH}"
+elif [ -e "${ZSH}" ]; then
+    echo "not a git checkout, left as is: ${ZSH}" >&2
+else
+    curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
+fi
+
+clone_or_update https://github.com/zsh-users/zsh-syntax-highlighting.git \
+    "${ZSH}/custom/plugins/zsh-syntax-highlighting"
+clone_or_update https://github.com/zsh-users/zsh-completions \
+    "${ZSH_CUSTOM:-${ZSH}/custom}/plugins/zsh-completions"
 
 
 ########## CONFIGURE VIM ###########
 
-git clone https://github.com/amix/vimrc.git ${HOME}/.vim_runtime
+clone_or_update https://github.com/amix/vimrc.git "${HOME}/.vim_runtime"
 sh ${HOME}/.vim_runtime/install_awesome_vimrc.sh
 
 mkdir -p ${HOME}/.vim/syntax
@@ -23,6 +53,17 @@ wget https://raw.githubusercontent.com/hashivim/vim-terraform/master/syntax/terr
 
 ######### ----------- ##########
 
+
+# This copy is a blunt overwrite, so anything added locally to a tracked file
+# is lost. Keep a copy of what changes, and say where it went.
+backup="${HOME}/.zsh_configure_backup/$(date +%Y%m%d-%H%M%S)"
+( cd "${wd}/home" && find . -type f -print ) | while read -r f; do
+    [ -f "${HOME}/${f}" ] || continue
+    cmp -s "${wd}/home/${f}" "${HOME}/${f}" && continue
+    mkdir -p "${backup}/$(dirname "${f}")"
+    cp -p "${HOME}/${f}" "${backup}/${f}"
+done
+[ -d "${backup}" ] && echo "replaced files backed up to ${backup}"
 
 cp -rf ${wd}/home/. ${HOME}/
 
