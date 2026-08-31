@@ -17,6 +17,15 @@ git config --global interactive.diffFilter 'delta --color-only'
 git config --global delta.navigate true
 git config --global delta.dark true
 
+# Two columns rather than one. This turns on line numbers implicitly, and long
+# lines wrap instead of being cut off.
+git config --global delta.side-by-side true
+
+# Line numbers on unchanged lines default to #444444, which is 2.2:1 against a
+# dark terminal and not really readable. #767676 clears 4.5:1 while staying
+# dimmer than the code itself, so the numbers still recede.
+git config --global delta.line-numbers-zero-style "#767676"
+
 # Contrast. The default Monokai comment colour (#75715e) lands at 3.3:1 against
 # delta's added-line background and 1.6:1 inside an emphasised span, well under
 # the 4.5:1 needed to read body text. zenburn's comment colour is light enough
