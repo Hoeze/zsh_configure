@@ -63,7 +63,15 @@ backup="${HOME}/.zsh_configure_backup/$(date +%Y%m%d-%H%M%S)"
     mkdir -p "${backup}/$(dirname "${f}")"
     cp -p "${HOME}/${f}" "${backup}/${f}"
 done
-[ -d "${backup}" ] && echo "replaced files backed up to ${backup}"
+# Take the directory back out again when nothing needed saving. -delete implies
+# -depth, so a tree of empty subdirectories collapses in one pass, and the
+# parent goes too once the last timestamped backup is gone.
+find "${backup}" -type d -empty -delete 2>/dev/null
+if [ -d "${backup}" ]; then
+    echo "replaced files backed up to ${backup}"
+else
+    rmdir "${HOME}/.zsh_configure_backup" 2>/dev/null
+fi
 
 cp -rf ${wd}/home/. ${HOME}/
 
