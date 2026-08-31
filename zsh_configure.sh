@@ -31,32 +31,12 @@ touch ${HOME}/.env.d/local.env
 
 ########## CONFIGURE GIT ############
 
-git config --global core.pager "diff-so-fancy | less --tabs=4 -RFX"
-
-# improved git colors from diff-so-fancy
-
 git config --global color.ui true
+git config --global merge.conflictStyle zdiff3
 
-git config --global color.diff-highlight.oldNormal    "red bold"
-git config --global color.diff-highlight.oldHighlight "red bold 52"
-git config --global color.diff-highlight.newNormal    "green bold"
-git config --global color.diff-highlight.newHighlight "green bold 22"
-
-git config --global color.diff.meta       "yellow"
-git config --global color.diff.frag       "magenta bold"
-git config --global color.diff.commit     "yellow bold"
-git config --global color.diff.old        "red bold"
-git config --global color.diff.new        "green bold"
-git config --global color.diff.whitespace "red reverse"
-
-# git-delta
-if which delta; then
-    git config --global core.pager delta
-    git config --global interactive.diffFilter 'delta --color-only'
-    git config --global delta.navigate true
-    git config --global delta.dark true
-    git config --global merge.conflictStyle zdiff3
-fi
+# Pager and diff highlighting. On a host without delta, run
+# diff-so-fancy_configure.sh by hand instead.
+sh "${wd}/delta_configure.sh"
 
 # KeePassXC merge driver
 #
