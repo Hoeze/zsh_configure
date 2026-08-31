@@ -103,7 +103,9 @@ setopt PROMPT_SP
 # Display non-zero exit codes
 setopt PRINT_EXIT_VALUE
 
-# test -f $ZSHRC_LOCAL && source $ZSHRC_LOCAL
+# Machine-specific additions live here. This file is never overwritten by
+# zsh_configure.sh, unlike .zshrc itself.
+test -f $ZSHRC_LOCAL && source $ZSHRC_LOCAL
 
 source $HOME/.env
 
